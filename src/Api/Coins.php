@@ -12,9 +12,11 @@ class Coins extends Api
      * @return array
      * @throws Exception
      */
-    public function getList(): array
-    {
-        return $this->get('/coins/list');
+    public function getList(bool $include_platform=false, array $params = []): array
+    {   
+        $params["include_platform"] = $include_platform;
+
+        return $this->get('/coins/list', $params);
     }
 
     /**
@@ -72,7 +74,7 @@ class Coins extends Api
      * @return array
      * @throws Exception
      */
-    public function getMarketChart(string $id, string $vsCurrency, string $days): array
+    public function getMarketChart(string $id, string $vsCurrency, string $days, array $params = []): array
     {
         $params['vs_currency'] = $vsCurrency;
         $params['days'] = $days;
@@ -87,7 +89,7 @@ class Coins extends Api
      * @return array
      * @throws Exception
      */
-    public function getMarketChartRange(string $id, string $vsCurrency, string $from, string $to): array
+    public function getMarketChartRange(string $id, string $vsCurrency, string $from, string $to, array $params = []): array
     {
         $params['vs_currency'] = $vsCurrency;
         $params['from'] = $from;
